@@ -1,5 +1,6 @@
 import unittest
 import numpy as np
+import random
 from iv_jett import iv_init
 
 class TestBetas(unittest.TestCase):
