@@ -23,5 +23,19 @@ class TestBetas(unittest.TestCase):
 
         self.assertIsNone(np.testing.assert_allclose(betas, x2))
 
+    def test_nonsingular_x(self):
+        collinear = np.transpose(np.matrix([ [1, 2, 3],
+                    [2, 4, 6],
+                    [96, 78, 0]]))
+
+        mat_x  = collinear
+        mat_z  = np.transpose(np.matrix([[1, .5, 2],
+                    [3, 0, .2],
+                    [1, 0, .4]]))
+
+        mat_y  = np.transpose(np.array([[3, 5, 2]]))
+
+        self.assertRaises(Exception)
+
 if __name__ == "__main__":
     unittest.main()

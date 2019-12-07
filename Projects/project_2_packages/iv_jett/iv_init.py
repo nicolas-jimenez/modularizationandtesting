@@ -27,6 +27,16 @@ def check_dim(a, b, c):
     except:
         raise Exception('Model underidentified')
 
+    try:
+        assert np.linalg.inv(np.transpose(a) @ a)
+    except: 
+        raise Exception('Collinearity in Xs detected')
+    
+    try:
+        assert np.linalg.inv(np.transpose(b) @ b)
+    except: 
+        raise Exception('Collinearity in Zs detected')
+
 def projection_matrix(b):
     '''
     Inputs:
