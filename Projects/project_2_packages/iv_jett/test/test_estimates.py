@@ -24,12 +24,27 @@ class TestBetas(unittest.TestCase):
         self.assertIsNone(np.testing.assert_allclose(betas, x2))
 
     def test_nonsingular_x(self):
+        random.seed(12345)
+        colin_row = np.random.rand(1, 3)
+        noncolin_row = np.random.rand(1, 3)
+        collinear = np.transpose(np.stack((colin_row, 2* colin_row, noncolin_row ), axis = 0))
+
+        mat_x  = collinear
+        mat_z  = np.transpose(np.matrix([[1, .5, 2],
+                    [3, 0, .2],
+                    [1, 0, .4]]))
+
+        mat_y  = np.transpose(np.array([[3, 5, 2]]))
+
+        self.assertRaises(Exception)
+
+    def test_nonsingular_z(self):
         collinear = np.transpose(np.matrix([ [1, 2, 3],
                     [2, 4, 6],
                     [96, 78, 0]]))
 
-        mat_x  = collinear
-        mat_z  = np.transpose(np.matrix([[1, .5, 2],
+        mat_z  = collinear
+        mat_x  = np.transpose(np.matrix([[1, .5, 2],
                     [3, 0, .2],
                     [1, 0, .4]]))
 
