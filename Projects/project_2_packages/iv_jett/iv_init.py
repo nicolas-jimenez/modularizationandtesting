@@ -28,12 +28,12 @@ def check_dim(a, b, c):
         raise Exception('Model underidentified')
 
     try:
-        assert np.linalg.inv(np.transpose(a) @ a)
+        assert np.linalg.det(np.transpose(a) @ a) != 0
     except: 
         raise Exception('Collinearity in Xs detected')
     
     try:
-        assert np.linalg.inv(np.transpose(b) @ b)
+        assert np.linalg.det(np.transpose(b) @ b) != 0
     except: 
         raise Exception('Collinearity in Zs detected')
 
